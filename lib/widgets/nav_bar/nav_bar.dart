@@ -76,20 +76,22 @@ class _NavBarState extends State<NavBar> {
                   Color(0xFF12b897),
                   Color(0xFF15cda8),
                 ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
-            child: Center(
-              child: Text("A",
-                  style: TextStyle(
-                      fontFamily: "GoogleSans",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.white)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+                          child: Center(
+                child: Image.network(
+                  // "./res/graphics/image_01.png",
+                  "assets/graphics/logo.png", scale: 1,
+                  // scale: 1,
+                ),
+              ),
             ),
           ),
           SizedBox(
             width: 16,
           ),
           Text(
-            "Anh Nguyễn",
+            ".Hawk",
             style: TextStyle(
               fontSize: 26,
               fontFamily: "GoogleSans",

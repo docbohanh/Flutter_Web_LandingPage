@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyDrawerLayout extends StatelessWidget {
-
-final ValueChanged<int> onSelectedChanged;
+  final ValueChanged<int> onSelectedChanged;
 
   const MyDrawerLayout({Key key, this.onSelectedChanged}) : super(key: key);
 
@@ -31,7 +30,17 @@ final ValueChanged<int> onSelectedChanged;
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text('Drawer Header'),
+            child: Container(
+              child: Center(
+                child: Image.network(
+                  // "./res/graphics/image_01.png",
+                  "assets/graphics/logo.png", 
+                  width: 100,
+                  height: 100,
+                  // scale: 1,
+                ),
+              ),
+            ),
             decoration: BoxDecoration(
               color: Color(0xFF12b897),
             ),
