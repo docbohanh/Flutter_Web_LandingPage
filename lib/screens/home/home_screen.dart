@@ -1,9 +1,55 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:helloweb/screens/base/base_screen.dart';
 
-class HomeScreen extends BaseScreenLayout {
+class HomeScreen extends StatefulWidget {
+  HomeScreen({Key key}) : super(key: key);
+
   @override
-  Widget buildLargeLayout() {
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends BaseScreenLayout<HomeScreen> {
+  List<String> _arrJobTitle = [
+    "Mobile Developer",
+    "UI/UX Designer",
+    "Photographer",
+    "Freelancer"
+  ];
+  int _currentJobPos = 0;
+  Timer _timer;
+
+  void _startTimer() {
+    const oneSec = const Duration(seconds: 5);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) => setState(
+        () {
+          if (_currentJobPos < _arrJobTitle.length - 1) {
+            _currentJobPos++;
+          } else {
+            _currentJobPos = 0;
+          }
+        },
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget buildLargeLayout(BuildContext context) {
     return SizedBox(
       height: 600,
       child: Stack(
@@ -22,41 +68,7 @@ class HomeScreen extends BaseScreenLayout {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Hello!",
-                      style: TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "GoogleSans",
-                          color: Color(0xFF8591B0))),
-                  RichText(
-                    text: TextSpan(
-                        text: "WellCome To ",
-                        style:
-                            TextStyle(fontSize: 60, color: Color(0xFF8591B0)),
-                        children: [
-                          TextSpan(
-                              text: "Britu",
-                              style: TextStyle(
-                                  fontSize: 60,
-                                  fontFamily: "GoogleSans",
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87))
-                        ]),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 20),
-                    child: Text(
-                      "LET’S EXPLORE THE WORLD",
-                      style: TextStyle(
-                        fontFamily: "GoogleSans",
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                ],
+                children: _buildContent(),
               ),
             ),
           )
@@ -66,50 +78,14 @@ class HomeScreen extends BaseScreenLayout {
   }
 
   @override
-  Widget buildSmallLayout() {
+  Widget buildSmallLayout(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              "Hello!",
-              style: TextStyle(
-                  fontSize: 40,
-                  color: Color(0xFF8591B0),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "GoogleSans"),
-            ),
-            RichText(
-              text: TextSpan(
-                text: 'WellCome To ',
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Color(0xFF8591B0),
-                  fontFamily: "GoogleSans",
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: 'Britu',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          fontFamily: "GoogleSans",
-                          color: Colors.black87)),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0, top: 20),
-              child: Text(
-                "LET’S EXPLORE THE WORLD",
-                style: TextStyle(fontFamily: "GoogleSans"),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
+            ..._buildContent(),
             Center(
               child: Image.network(
                 // "./res/graphics/image_01.png",
@@ -128,4 +104,56 @@ class HomeScreen extends BaseScreenLayout {
       ),
     );
   }
+
+  List<Widget> _buildContent() {
+    return [
+      Text("Hello!",
+          style: TextStyle(
+              fontSize: 60,
+              fontWeight: FontWeight.bold,
+              fontFamily: "GoogleSans",
+              color: Color(0xFF3f3d56))),
+      RichText(
+        text: TextSpan(
+            text: "Wellcome to ",
+            style: TextStyle(
+                fontSize: 40,
+                fontFamily: "GoogleSans",
+                color: Color(0xFF3f3d56)),
+            children: [
+              TextSpan(
+                  text: "My home page",
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontFamily: "GoogleSans",
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF12b897)))
+            ]),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 15.0),
+        child: RichText(
+          text: TextSpan(
+              text: "I am a ",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "GoogleSans",
+                  color: Color(0xFF3f3d56)),
+              children: [
+                TextSpan(
+                    text: " ${_arrJobTitle[_currentJobPos]}",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: "GoogleSans",
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF12b897)))
+              ]),
+        ),
+      ),
+      SizedBox(
+        height: 40,
+      ),
+    ];
+  }
+
 }

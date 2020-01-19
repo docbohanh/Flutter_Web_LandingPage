@@ -89,7 +89,7 @@ class _NavBarState extends State<NavBar> {
             width: 16,
           ),
           Text(
-            "Britu",
+            "Anh Nguyễn",
             style: TextStyle(
               fontSize: 26,
               fontFamily: "GoogleSans",

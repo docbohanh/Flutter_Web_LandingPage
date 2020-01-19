@@ -60,24 +60,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               )
             : null,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              NavBar(
-                onSelectedChanged: (index) {
-                  setState(() {
-                    _currentPageIndex = index;
-                  });
-                },
-                onToggleDrawerLayout: () {
-                  _scaffoldKey?.currentState?.openEndDrawer();
-                },
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            NavBar(
+              onSelectedChanged: (index) {
+                setState(() {
+                  _currentPageIndex = index;
+                });
+              },
+              onToggleDrawerLayout: () {
+                _scaffoldKey?.currentState?.openEndDrawer();
+              },
+            ),
+            Expanded(
+                          child: SingleChildScrollView(
+                child: Body(
+                  pageIndex: _currentPageIndex,
+                ),
               ),
-              Body(
-                pageIndex: _currentPageIndex,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
