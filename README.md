@@ -5,7 +5,9 @@ Build a simple website using Flutter.
 ## What will you learn ?
 
 - How to build a simple website using flutter web
-- Managed resource (graphic/ font) when deploy to production
+- Manage resources (graphic/ font) when deploy to production
+- Structure of flutter web folder
+- Build simple web and deploying to Github page
 
 ## Getting Started
 
