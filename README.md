@@ -1,6 +1,11 @@
 # Hello flutter web
 
-A simple website build using Flutter.
+Build a simple website using Flutter.
+
+## What will you learn ?
+
+- How to build a simple website using flutter web
+- Managed resource (graphic/ font) when deploy to production
 
 ## Getting Started
 
